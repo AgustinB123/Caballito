@@ -1,36 +1,90 @@
-name: Deploy on Railway using Docker
+#!/usr/bin/env node
 
-on:
-  push:
-    branches:
-      - main
-      
-jobs:
-    build:
-      
-        runs-on: ubuntu-latest
+/**
+ * Module dependencies.
+ */
 
+var app = require('../app');
+var debug = require('debug')('ci-cd:server');
+var http = require('http');
 
-        steps:
-          - name: Log in to docker hub 
-            uses: docker/login-action@v3
-            with:
-                username: ${{ secrets.DOCKER_USERNAME}}
-                password: ${{ secrets.DOCKER_PASSWORD}}
-      
-          - name: build and  Push Docker image
-            uses: docker/build-push-action@v3
-            with:
-                push: true
-                tags: ${{secrets.DOCKER_USERNAME}}/caballito:latest
+/**
+ * Get port from environment and store in Express.
+ */
 
-          - name: Pull Docker image
-            run: docker pull ${{secrets.DOCKER_USERNAME}}/caballito:latest
-            
-          - name: Install Railway # 1
-            run: npm i -g @railway/cli
-          
-          - name: Deploy 
-            run: railway up --service caballito
-            env:
-                RAILWAY_TOKEN: ${{ secrets.RAILWAY_DOCKER_PRODUCTION }}
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
