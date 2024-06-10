@@ -10,8 +10,11 @@ jobs:
       
         runs-on: ubuntu-latest
 
+
 #preguntarle a tombe porque no tengo test ni deploy
         steps:
+          - name: Checkout code
+            uses: actions/checkout@v3
           - name: Log in to docker hub 
             uses: docker/login-action@v3
             with:
@@ -34,3 +37,5 @@ jobs:
             run: railway up --service hopeful-gentleness
             env:
                 RAILWAY_TOKEN: ${{ secrets.RAILWAY_DOCKER_PRODUCTION }}
+
+    
