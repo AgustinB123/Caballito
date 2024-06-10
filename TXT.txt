@@ -491,4 +491,6 @@ jobs:
           - name: Deploy 
             run: railway up --service caballito
             env:
-                RAILWAY_TOKEN: ${{ secrets.RAILWAY_DOCKER_PRODUCTION }}
+                RAILWAY_TOKEN: ${{ secrets.RAILWAY_DOCKER_PRODUCTION }} asjdasd
+                asjdasd
+                
