@@ -1,6 +1,5 @@
-/**/
 
-const ftest = require('./utils/firstTest'); // Importa la función firstTest
+/* const ftest = require('./utils/firstTest'); // Importa la función firstTest
 
 describe('initial', () => {                 // Define un bloque de pruebas
   test('first tests', () => {               // Define una prueba
@@ -10,8 +9,9 @@ describe('initial', () => {                 // Define un bloque de pruebas
 
 //Usa Jest para verificar que las funciones en tu aplicación funcionan como se espera.
 
-/*
-// esta falla
+
+*/
+/* esto me dice el chat que cambie
 
 const ftest = require('./utils/firstTest');
 
@@ -22,4 +22,15 @@ describe('initial', () => {
   });
 });
 
-*/
+*/ 
+
+
+// esto rompe
+
+const ftest = require('./utils/firstTest'); // Importa la función firstTest
+
+describe('initial', () => {                 // Define un bloque de pruebas
+  test('first tests', () => {               // Define una prueba
+    expect(ftest()).toBe(true);            // Verifica que el resultado de firstTest() sea false
+  });
+});
