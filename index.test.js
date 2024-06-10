@@ -1,3 +1,5 @@
+/**/
+
 const ftest = require('./utils/firstTest'); // Importa la función firstTest
 
 describe('initial', () => {                 // Define un bloque de pruebas
@@ -9,12 +11,14 @@ describe('initial', () => {                 // Define un bloque de pruebas
 //Usa Jest para verificar que las funciones en tu aplicación funcionan como se espera.
 
 
-/* esto me dice el chat que cambie
+// esta falla
+/*
 const ftest = require('./utils/firstTest');
 
 describe('initial', () => {
   test('first tests', () => {
-    expect(ftest()).toBe(false);
+    // Cambiar la expectativa para que falle deliberadamente
+    expect(true).toBe(ftest());
   });
 });
 */
