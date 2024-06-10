@@ -1,0 +1,7 @@
+EJS es un lenguaje de plantillas popular utilizado para generar contenido HTML 
+dinámico dentro de aplicaciones Node.js. Permite crear plantillas HTML que incluyen fragmentos 
+de código JavaScript, lo que facilita la construcción de páginas web dinámicas e interactivas.
+
+index.ejs: Este archivo representa la plantilla principal o la página de inicio de tu aplicación.
+
+error.ejs:Este archivo representa una plantilla utilizada para mostrar mensajes de error al usuario
