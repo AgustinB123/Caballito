@@ -1,3 +1,7 @@
+https://railway.app/project/c27933fa-a0fe-4d1a-a696-50ed40c7142d
+
+1a47e7bc-dbf0-4ea8-88f3-a35b831536cb
+
 IC caballito de batalla/
 ├── .github/workflows/                
 │   └── ci.yml         
@@ -493,4 +497,3 @@ jobs:
             env:
                 RAILWAY_TOKEN: ${{ secrets.RAILWAY_DOCKER_PRODUCTION }} asjdasd
                 asjdasd
-                
