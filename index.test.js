@@ -10,9 +10,9 @@ describe('initial', () => {                 // Define un bloque de pruebas
 
 //Usa Jest para verificar que las funciones en tu aplicación funcionan como se espera.
 
-
-// esta falla
 /*
+// esta falla
+
 const ftest = require('./utils/firstTest');
 
 describe('initial', () => {
@@ -21,4 +21,5 @@ describe('initial', () => {
     expect(true).toBe(ftest());
   });
 });
+
 */

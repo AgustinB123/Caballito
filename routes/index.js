@@ -4,7 +4,7 @@ const ftest = require('../utils/firstTest'); // Importa la función firstTest
 
 /* GET home page. */
 router.get('/', function(req, res, next) {   // Define la ruta para la página principal
-  res.render('index', { title: 'Caballito de batalla de agusmaster' }); // Renderiza la vista 'index' con el título 'Express'
+  res.render('index', { title: 'Express' }); // Renderiza la vista 'index' con el título 'Express'
 });
 
 router.get('/test', function(req, res) { // Define la ruta para '/test'
