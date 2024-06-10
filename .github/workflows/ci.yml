@@ -31,6 +31,6 @@ jobs:
             run: npm i -g @railway/cli
           
           - name: Deploy 
-            run: railway up --service caballito
+            run: railway up --service hopeful-gentleness
             env:
                 RAILWAY_TOKEN: ${{ secrets.RAILWAY_DOCKER_PRODUCTION }}
