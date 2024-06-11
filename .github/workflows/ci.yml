@@ -1,7 +1,7 @@
 name: Despligue con Railway, la re sufri
 
 on:
-  push:
+  pull_request:
     branches:
       - main
       
