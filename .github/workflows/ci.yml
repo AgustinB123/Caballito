@@ -1,4 +1,4 @@
-name: Despligue con Railway, la re sufri
+name: Despliegue con Railway, la re sufri
 
 on:
   pull_request:
@@ -6,57 +6,65 @@ on:
       - main
       
 jobs:
-    build:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: success() 
       
-        runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-        steps:
-
-          - name: Checkout code
-            uses: actions/checkout@v3
-
-          - name: Set up Node.js
-            uses: actions/setup-node@v3
-            with:
-              node-version: '18' # Asegúrate de usar la versión de Node.js que necesita tu proyecto me asuegure  asasdadasdadasddasdasdasdadasassdasdada 
-
-          - name: Install dependencies
-            run: npm install
-
-          - name: Run tests
-            run: npm test
-
-    deploy:
-        runs-on: ubuntu-latest
-        needs: build
-        if: success() 
-          
-        steps:
-          
-          - name: Checkout code
-            uses: actions/checkout@v3
-
-          - name: Log in to docker hub 
-            uses: docker/login-action@v3
-            with:
-                username: ${{ secrets.DOCKER_USERNAME}}
-                password: ${{ secrets.DOCKER_PASSWORD}}
-      
-          - name: build and  Push Docker image
-            uses: docker/build-push-action@v3
-            with:
-                push: true
-                tags: ${{secrets.DOCKER_USERNAME}}/caballito:latest
-
-          - name: Pull Docker image
-            run: docker pull ${{secrets.DOCKER_USERNAME}}/caballito:latest
-            
-          - name: Install Railway # 1
-            run: npm i -g @railway/cli
-          
-          - name: Deploy 
-            run: railway up --service hopeful-gentleness
-            env:
-                RAILWAY_TOKEN: ${{ secrets.RAILWAY_DOCKER_PRODUCTION }}
-
+      - name: Log in to docker hub 
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
     
+      - name: build and Push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/caballito:latest
+
+      - name: Pull Docker image
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/caballito:latest
+        
+      - name: Install Railway
+        run: npm i -g @railway/cli
+      
+      - name: Deploy 
+        run: railway up --service hopeful-gentleness
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_DOCKER_PRODUCTION }}
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: always()
+      
+    steps:
+      - name: Notify Slack of Success or Failure
+        uses: act10ns/slack@v2.1.0
+        with:
+          status: ${{ job.status }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOKPUSH_URL }}
+         
