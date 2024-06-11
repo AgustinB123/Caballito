@@ -66,5 +66,5 @@ jobs:
         uses: act10ns/slack@v2.1.0
         with:
           status: ${{ job.status }}
-          webhook_url: ${{ secrets.SLACK_WEBHOOKPUSH_URL }}
+          webhook-url: ${{ secrets.SLACK_WEBHOOKPUSH_URL }}
          
