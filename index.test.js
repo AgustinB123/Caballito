@@ -14,7 +14,7 @@ describe('initial', () => {                 // Define un bloque de pruebas
 
 /*
 
-// esto rompe
+// esto rompe todo el codigo
 
 const ftest = require('./utils/firstTest'); // Importa la función firstTest
 
