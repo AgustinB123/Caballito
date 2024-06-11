@@ -1,8 +1,35 @@
+/* Aplicar un estilo básico al cuerpo */
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f4f4f9; /* Color de fondo claro */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Familia de fuentes */
+  color: #333; /* Color del texto */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
-a {
-  color: #00B7FF;
+/* Estilo para el título */
+h1 {
+  font-size: 2.5em; /* Tamaño de la fuente */
+  margin-bottom: 0.5em;
+  color: #007BFF; /* Color del texto */
+}
+
+/* Estilo para el párrafo */
+p {
+  font-size: 1.2em;
+  margin-bottom: 1.5em;
+}
+
+/* Estilo para la imagen */
+img {
+  max-width: 30%; /* Ancho máximo de la imagen */
+  height: auto; /* Altura automática para mantener la proporción */
+  border: 5px solid #007BFF; /* Borde azul */
+  border-radius: 10px; /* Esquinas redondeadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
 }
