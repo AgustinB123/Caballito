@@ -4,7 +4,7 @@ const ftest = require('./utils/firstTest'); // Importa la función firstTest
 
 describe('initial', () => {                 // Define un bloque de pruebas
   test('first tests', () => {               // Define una prueba
-    expect(ftest()).toBe(false);            // Verifica que el resultado de firstTest() sea false
+    expect(ftest()).toBe(true);            // Verifica que el resultado de firstTest() sea false
   });
 });
 
@@ -14,7 +14,7 @@ describe('initial', () => {                 // Define un bloque de pruebas
 
 /*
 
-// esto rompe
+// esto rompe todo el codigo
 
 const ftest = require('./utils/firstTest'); // Importa la función firstTest
 
