@@ -66,4 +66,5 @@ jobs:
         uses: act10ns/slack@v2.1.0
         with:
           status: ${{ job.status }}
-          webhook-url: ${{ secrets.SLACK_WEBHOOKPUSH_URL }}   # estos son cambios para que e
+          webhook-url: ${{ secrets.SLACK_WEBHOOKPUSH_URL }}   # estos son cambios para que elimine la tarea 
+         
