@@ -25,11 +25,11 @@ jobs:
         run: npm test
 
       - name: Notify Slack of Success or Failure
+        if: always()
         uses: act10ns/slack@v2.1.0
         with:
           status: ${{ job.status }}
-          webhook-url: ${{ secrets.SLACK_WEBHOOKPUSH_URL }}   # estos son cambios para que elimine la tarea  asdadasdadasdas asdasdasd ahora si
-         
+          webhook-url: ${{ secrets.SLACK_WEBHOOKPUSH_URL }}   # aca cambio
 
   deploy:
     runs-on: ubuntu-latest
