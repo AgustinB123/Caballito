@@ -24,6 +24,13 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Notify Slack of Success or Failure
+        uses: act10ns/slack@v2.1.0
+        with:
+          status: ${{ job.status }}
+          webhook-url: ${{ secrets.SLACK_WEBHOOKPUSH_URL }}   # estos son cambios para que elimine la tarea 
+         
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -56,15 +63,4 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_DOCKER_PRODUCTION }}
 
-  notify:
-    runs-on: ubuntu-latest
-    needs: deploy
-    if: always()
-      
-    steps:
-      - name: Notify Slack of Success or Failure
-        uses: act10ns/slack@v2.1.0
-        with:
-          status: ${{ job.status }}
-          webhook-url: ${{ secrets.SLACK_WEBHOOKPUSH_URL }}   # estos son cambios para que elimine la tarea 
          
